@@ -4,6 +4,38 @@ import * as Yup from "yup";
 import axios from 'axios';
 import styled from 'styled-components';
 
+const StyledForm = styled.div`
+    display:flex;
+    flex-direction: column;
+    width: 40%;
+    margin: 0 auto; 
+    justify-content:space-around;
+`;
+
+const FormContainer = styled.div`
+    display:flex;
+    flex-direction:column;
+    border: 1px solid black;
+    width: 60%;
+    margin: 0 auto;
+    padding: 1% 3% 4% 3%;
+    margin-top: 2%;
+    justify-content: center;
+
+`;
+
+
+const StyledUL = styled.ul`
+    display:flex;
+    flex-direction:column;
+    width: 30%;
+    margin: 0 auto;
+    align-items:flex-start;
+    padding:3% 0 3% 10%;
+`;
+
+
+
 
 function UserForm({values,errors,touched,status}){
 
@@ -20,25 +52,32 @@ function UserForm({values,errors,touched,status}){
 
 
     return(
-    <div>
+    <FormContainer>
+        <React.Fragment>
+        <h1>User Form</h1>
+        </React.Fragment>
         <Form>
-        <Field type="text" name="name" placeholder="Name" />
-        {touched.name && errors.name && (<p>{errors.name}</p>)}
-        <Field type="text" name="email" placeholder="Email" />
-        {touched.email && errors.email && (<p>{errors.email}</p>)}
-        <Field type="password" name="password" placeholder="Password" />
-        {touched.password && errors.password && (<p>{errors.password}</p>)}
-        <Field type="checkbox" name="tos" placeholder="Terms of Service" />
-        <button>submit</button>
+            <StyledForm>
+                <Field type="text" name="name" placeholder="Name" />
+                {touched.name && errors.name && (<p>{errors.name}</p>)}
+                <Field type="text" name="email" placeholder="Email" />
+                {touched.email && errors.email && (<p>{errors.email}</p>)}
+                <Field type="password" name="password" placeholder="Password" />
+                {touched.password && errors.password && (<p>{errors.password}</p>)}
+                <Field type="checkbox" name="tos" placeholder="Terms of Service" checked={values.tos}/>
+                <button type="submit">submit</button>
+            </StyledForm>
         </Form>
-        {users.map(user =>(
-            <ul key={user.id}>
-            <li>{user.name}</li>
-            <li>{user.email}</li>
-            <li>{user.password}</li>
-            </ul>
+            {users.map(user =>(
+                <div>
+                <StyledUL key={user.id}>
+                <li>{user.name}</li>
+                <li>{user.email}</li>
+                <li>{user.password}</li>
+                </StyledUL> 
+                </div>
             ))}
-    </div>
+    </FormContainer>
     );
 };
 
